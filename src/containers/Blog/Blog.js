@@ -19,7 +19,7 @@ class Blog extends Component {
         axios.get('https://jsonplaceholder.typicode.com/posts')
             .then(response => {
                     const posts = response.data.slice(0, 8)
-                        // Update the API data by adding the value of Author
+                    // Update the API data by adding the value of Author
                     const updatedPosts = posts.map(post => {
                         return {
                             ...post,
@@ -34,36 +34,30 @@ class Blog extends Component {
     }
 
     selectedPostHandler = (id) => {
-        this.setState({ selectedPostId: id })
+        this.setState({selectedPostId: id})
     }
 
     render() {
         const posts = this.state.posts.map(post => {
-            return <Post
-            key = { post.id }
-            title = { post.title }
-            author = { post.author }
-            clicked = {
-                () => this.selectedPostHandler(post.id) }
-            />
+            return <Post 
+                key={post.id} 
+                title={post.title} 
+                author={post.author}
+                clicked={() => this.selectedPostHandler(post.id)} />
         })
 
-        return ( <
-            div >
-            <
-            section className = "Posts" > { posts } <
-            /section>  <
-            section >
-            <
-            FullPost id = { this.state.selectedPostId }
-            /> <
-            /section>  <
-            section >
-            <
-            NewPost / >
-            <
-            /section>  <
-            /div >
+        return ( 
+            <div >
+                <section className = "Posts" >
+                    {posts}
+                </section> 
+                <section >
+                    <FullPost id={this.state.selectedPostId} />
+                </section> 
+                <section >
+                    <NewPost / >
+                </section> 
+            </div >
         );
     }
 }
